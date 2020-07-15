@@ -32,7 +32,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Update = () => {
     const classes                             = useStyles()
-    const [ user, setUser ]                   = useState<TUser>()
+    const [ user, setUser ]                   = useState<TUser>({
+        id        : 'no-id',
+        firstName : '',
+        lastName  : '',
+        email     : '',
+        password  : '',
+        birthDate : '1970-01-01',
+        salary    : 0,
+        postalCode: 0,
+        address   : '',
+    })
     const [ loading, setLoading ]             = useState<boolean>(false)
     const [ updateLoading, setUpdateLoading ] = useState<boolean>(false)
     const [ invalidFields, setInvalidFields ] = useState<string[]>([])
@@ -46,10 +56,6 @@ const Update = () => {
         setLoading(true)
         getUser(id)
             .then(response => {
-                setUser({
-                    ...response.data,
-                    birthDate: convertDateToString(response.data.birthDate),
-                })
                 const messages: TMessage[] = response.errors.map((error: TError) => ({
                     type   : 'error',
                     message: error.message,
@@ -60,6 +66,18 @@ const Update = () => {
                     messages.push({
                         type   : 'success',
                         message: response.message,
+                    })
+                }
+
+                if (response.data) {
+                    setUser({
+                        ...response.data,
+                        birthDate: convertDateToString(response.data.birthDate),
+                    })
+                } else {
+                    messages.push({
+                        type   : 'error',
+                        message: `Cannot find user with id: ${id}`,
                     })
                 }
 

@@ -3,8 +3,12 @@ import { TUser }               from '../types/user'
 import { convertStringToDate } from './date-service'
 
 const saveUser = async (user: TUser) => {
-    user.birthDate = convertStringToDate(user.birthDate)
-    return request.post('/user', user)
+    const response = await request.post('/user', {
+        ...user,
+        birthDate: convertStringToDate(user.birthDate),
+    })
+
+    return response.data
 }
 
 const getUsers = async () => {

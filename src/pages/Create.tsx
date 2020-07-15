@@ -33,7 +33,17 @@ const Create = () => {
     const classes = useStyles()
 
     const [ loading, setLoading ]             = useState<boolean>(false)
-    const [ user, setUser ]                   = useState<TUser>()
+    const [ user, setUser ]                   = useState<TUser>({
+        id        : 'no-id',
+        firstName : '',
+        lastName  : '',
+        email     : '',
+        password  : '',
+        birthDate : '1970-01-01',
+        salary    : 0,
+        postalCode: 0,
+        address   : '',
+    })
     const [ invalidFields, setInvalidFields ] = useState<string[]>([])
     const [ messages, setMessages ]           = useState<TMessage[]>()
 
@@ -68,7 +78,7 @@ const Create = () => {
     }
 
     return (
-        <div style={{ width: '30%', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ width: '30%', minWidth: 500, margin: '0 auto', textAlign: 'center' }}>
             <h1>Create new user</h1>
 
             {!!messages?.length && (<Notifications notifications={messages}/>)}
@@ -77,7 +87,6 @@ const Create = () => {
                     <TextField
                         id="first-name"
                         label="First name"
-                        defaultValue=""
                         value={user?.firstName}
                         name='firstName'
                         onChange={(e) => handleChange('firstName', e.target.value)}
@@ -87,7 +96,6 @@ const Create = () => {
                     <TextField
                         id="last-name"
                         label="Last name"
-                        defaultValue=""
                         value={user?.lastName}
                         name='lastName'
                         onChange={(e) => handleChange('lastName', e.target.value)}
@@ -99,7 +107,6 @@ const Create = () => {
                     <TextField
                         id="password"
                         label="Password"
-                        defaultValue=""
                         value={user?.password}
                         name='password'
                         onChange={(e) => handleChange('password', e.target.value)}
@@ -110,7 +117,6 @@ const Create = () => {
                     <TextField
                         id="phoneNumber"
                         label="Phone Number"
-                        defaultValue=""
                         value={user?.phoneNumber}
                         name='phoneNumber'
                         onChange={(e) => handleChange('phoneNumber', e.target.value)}
@@ -123,7 +129,6 @@ const Create = () => {
                     <TextField
                         id="email"
                         label="Email"
-                        defaultValue=""
                         value={user?.email}
                         name='email'
                         onChange={(e) => handleChange('email', e.target.value)}
@@ -135,7 +140,6 @@ const Create = () => {
                         required
                         id="birthDate"
                         label="Birth Date"
-                        defaultValue={convertDateToString('1970-01-01')}
                         value={user?.birthDate}
                         name='birthDate'
                         onChange={(e) => handleChange('birthDate', e.target.value)}
@@ -149,7 +153,6 @@ const Create = () => {
                         required
                         id="salary"
                         label="Salary"
-                        defaultValue=""
                         value={user?.salary}
                         name='salary'
                         onChange={(e) => handleChange('salary', e.target.value)}
@@ -162,7 +165,6 @@ const Create = () => {
                         required
                         id="postalCode"
                         label="Postal Code"
-                        defaultValue=""
                         value={user?.postalCode}
                         name='postalCode'
                         onChange={(e) => handleChange('postalCode', e.target.value)}
@@ -175,7 +177,6 @@ const Create = () => {
                 <TextField
                     id="address"
                     label="Address"
-                    defaultValue=""
                     value={user?.address}
                     name='address'
                     onChange={(e) => handleChange('address', e.target.value)}
