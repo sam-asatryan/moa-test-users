@@ -7,9 +7,8 @@ import Button                              from '@material-ui/core/Button'
 import Notifications from '../components/notifications'
 import Loading       from '../components/Loading'
 
-import { saveUser }            from '../services/user-service'
-import { validate }            from '../services/validation-service'
-import { convertDateToString } from '../services/date-service'
+import { saveUser } from '../services/user-service'
+import { validate } from '../services/validation-service'
 
 import { TUser }    from '../types/user'
 import { TMessage } from '../types/message'
