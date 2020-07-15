@@ -1,4 +1,4 @@
-import React                             from 'react'
+import React, { useEffect }              from 'react'
 import { SnackbarProvider, useSnackbar } from 'notistack'
 
 import { TMessage } from '../types/message'
@@ -6,8 +6,10 @@ import { TMessage } from '../types/message'
 const NotificationMaker = ({ notifications }: { notifications: TMessage[] }) => {
     const { enqueueSnackbar } = useSnackbar()
 
-    notifications.forEach(notification => {
-        enqueueSnackbar(notification.message, { variant: notification.type })
+    useEffect(() => {
+        notifications.forEach(notification => {
+            enqueueSnackbar(notification.message, { variant: notification.type })
+        })
     })
 
     return null
